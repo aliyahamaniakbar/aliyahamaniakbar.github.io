@@ -292,6 +292,15 @@ section { position: relative; }
   min-height: 140px;
   resize: vertical;
 }
+.contact-form-status {
+  margin: 0;
+  min-height: 1.25em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+  text-align: center;
+}
 .contact-submit {
   align-self: center;
   margin-top: 8px;
@@ -305,11 +314,22 @@ section { position: relative; }
   border: 1px solid var(--accent);
   border-radius: 9999px;
   cursor: none;
-  transition: color 0.2s, background 0.2s, border-color 0.2s;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, opacity 0.2s;
 }
 .contact-submit:hover {
   color: var(--black);
   background: transparent;
+}
+.contact-submit:disabled,
+.contact-submit.is-submitting,
+.contact-submit.is-submitted {
+  opacity: 0.92;
+}
+.contact-submit:disabled:hover,
+.contact-submit.is-submitting:hover,
+.contact-submit.is-submitted:hover {
+  color: var(--white);
+  background: var(--accent);
 }
 .contact-footer {
   margin-top: 60px;
