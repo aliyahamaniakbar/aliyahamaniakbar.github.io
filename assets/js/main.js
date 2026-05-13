@@ -20,36 +20,22 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 reveals.forEach(el => revealObserver.observe(el));
 
-// Parallax on title spreads
-const parallaxItems = [
-  { el: document.getElementById('parallax-1'), speed: 0.4 },
-  { el: document.getElementById('parallax-2'), speed: 0.4 },
-  { el: document.getElementById('parallax-3'), speed: 0.4 },
-  { el: document.getElementById('parallax-4'), speed: 0.4 },
-  { el: document.getElementById('parallax-5'), speed: 0.4 },
-];
-
 // Hero parallax
 const heroBg = document.getElementById('hero-bg');
+const mobileHeroQuery = window.matchMedia('(max-width: 820px)');
 
 function onScroll() {
   const scrollY = window.scrollY;
 
-  // Hero parallax
   if (heroBg) {
-    heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
+    if (mobileHeroQuery.matches) {
+      heroBg.style.transform = '';
+    } else {
+      heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
+    }
   }
-
-  // Each spread
-  parallaxItems.forEach(item => {
-    if (!item.el) return;
-    const parent = item.el.closest('.project-title-spread');
-    if (!parent) return;
-    const rect = parent.getBoundingClientRect();
-    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-    item.el.style.transform = `translateY(${center * item.speed}px)`;
-  });
 }
 
 window.addEventListener('scroll', onScroll, { passive: true });
+mobileHeroQuery.addEventListener('change', onScroll);
 onScroll();
